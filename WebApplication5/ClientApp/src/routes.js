@@ -4,8 +4,7 @@ import Loadable from 'react-loadable'
 
 
 import DefaultLayout from './containers/DefaultLayout';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+
 function Loading() {
   return <div>Loading...</div>;
 }
@@ -15,8 +14,13 @@ const Breadcrumbs = Loadable({
   loading: Loading,
 });
 
-const Cards = Loadable({
-  loader: () => import('./views/Base/Cards'),
+const Questions = Loadable({
+  loader: () => import('./views/Base/Questions'),
+  loading: Loading,
+});
+
+const EditQuestion = Loadable({
+  loader: () => import('./views/Base/EditQuestion'),
   loading: Loading,
 });
 
@@ -191,13 +195,12 @@ const User = Loadable({
 const routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/fetchdata', name: 'Fetchdata', component: FetchData },
-  { path: '/count', name: 'count', component: Counter },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
-  { path: '/base', exact: true, name: 'Base', component: Cards },
-  { path: '/base/cards', name: 'Cards', component: Cards },
+  { path: '/base', exact: true, name: 'Base', component: Questions },
+  { path: '/base/questions', name: 'Questions', component: Questions },
+  { path: '/base/editquestion/:id', name: 'EditQuestion', component: EditQuestion },
   { path: '/base/forms', name: 'Forms', component: Forms },
   { path: '/base/switches', name: 'Switches', component: Switches },
   { path: '/base/tables', name: 'Tables', component: Tables },

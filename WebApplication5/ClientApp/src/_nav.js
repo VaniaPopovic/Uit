@@ -27,8 +27,8 @@ export default {
       icon: 'icon-pencil'
     },
    {
-      name: 'Card',
-      url: '/base/cards',
+      name: 'Questions',
+      url: '/base/questions',
       icon: 'icon-pencil'
     }
   ]

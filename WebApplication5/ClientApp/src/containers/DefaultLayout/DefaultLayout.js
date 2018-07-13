@@ -23,6 +23,69 @@ import DefaultFooter from './DefaultFooter';
 import DefaultHeader from './DefaultHeader';
 
 class DefaultLayout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      questions: {
+        items: [
+          {
+            name: 'Dashboard',
+            url: '/dashboard',
+            icon: 'icon-speedometer'
+          },
+          {
+            title: true,
+            name: 'Modules'
+          },
+          {
+            name: 'Questions',
+            url: '/base/questions',
+            icon: 'icon-pencil'
+          }
+        ]
+      }
+    }
+  }
+
+
+  componentDidMount() {
+    var old = this.state.questions;
+    fetch('/api/Subjects')
+      .then((Response) => Response.json())
+      .then((result) => {
+
+
+
+       for (var i in result) {
+         var qs = {
+           name: result[i].subjectName, icon: 'icon-pencil', children: [] };
+         for (var k in result[i].chapter) {
+
+           var ch = { name: result[i].chapter[k].chapterName, icon: 'icon-layers', children: [] };
+           qs.children.push(ch);
+           for (var j in result[i].chapter[k].questions) {
+             var question = {
+               name: result[i].chapter[k].questions[j].text, url: 'question/' + result[i].chapter[k].questions[j].questionID, icon: 'icon-puzzle'
+             };
+             ch.children.push(question);
+             //  console.log(result[i].chapter[k].questions[j]);
+             //var qs = { name: result[i].subjectName, url: 'test', icon: 'icon-pencil' };
+
+           }
+         }
+         old.items.push(qs);
+         console.log(old);
+       }
+        this.setState({
+          questions: old
+
+        })
+        
+    //    console.log(items);
+      
+       
+      })
+  }
   render() {
     return (
       <div className="app">
@@ -33,7 +96,8 @@ class DefaultLayout extends Component {
           <AppSidebar fixed display="lg">
             <AppSidebarHeader />
             <AppSidebarForm />
-            <AppSidebarNav navConfig={navigation} {...this.props} />
+            <AppSidebarNav navConfig={this.state.questions} {...this.props} />
+            {console.log(this.state.questions)}
             <AppSidebarFooter />
             <AppSidebarMinimizer />
           </AppSidebar>

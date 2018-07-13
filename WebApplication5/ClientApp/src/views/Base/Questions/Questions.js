@@ -44,7 +44,6 @@ class Questions extends Component {
                       <h4 className="card-title">Question ID: {allQuestions.questionID}</h4>
                       <p className="card-text">Python text:  {allQuestions.textPython}</p>
                       <p className="card-text">Mathemtca text: {allQuestions.textMathematica}</p>
-                      <a className="btn btn-primary"><NavLink to={"/PostDetail/" + allQuestions.questionID}>Go For Detail</NavLink></a>
                       <a className="btn btn-danger"><NavLink to={"/base/editquestion/" + allQuestions.questionID}>Edit This Post</NavLink></a>
                     </div>
                   </div>

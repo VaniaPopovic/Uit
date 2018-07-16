@@ -29,6 +29,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-accessible-accordion": "^2.4.3",
+    "react-ace": "^6.1.4",
     "react-chartjs-2": "^2.7.2",
     "react-dom": "^16.4.1",
     "react-loadable": "^5.4.0",
@@ -40,7 +41,8 @@
     "react-validation": "^3.0.7",
     "reactstrap": "^6.1.0",
     "redux": "^4.0.0",
-    "simple-line-icons": "^2.4.1"
+    "simple-line-icons": "^2.4.1",
+    "skulpt": "^0.11.1"
   },
   "devDependencies": {
     "babel-jest": "^23.0.1",

@@ -15,7 +15,7 @@ import {
   AppSidebarNav,
 } from '@coreui/react';
 // sidebar nav config
-import navigation from '../../_nav';
+
 // routes config
 import routes from '../../routes';
 import DefaultAside from './DefaultAside';
@@ -65,7 +65,7 @@ class DefaultLayout extends Component {
            qs.children.push(ch);
            for (var j in result[i].chapter[k].questions) {
              var question = {
-               name: result[i].chapter[k].questions[j].text, url: 'question/' + result[i].chapter[k].questions[j].questionID, icon: 'icon-puzzle'
+               name: result[i].chapter[k].questions[j].title, url: '/questions/' + result[i].chapter[k].questions[j].questionID, icon: 'icon-puzzle'
              };
              ch.children.push(question);
              //  console.log(result[i].chapter[k].questions[j]);

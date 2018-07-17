@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 
-import EditQuestion from './views/Base/Questions';
 import './App.css';
 // Styles
 // CoreUI Icons Set

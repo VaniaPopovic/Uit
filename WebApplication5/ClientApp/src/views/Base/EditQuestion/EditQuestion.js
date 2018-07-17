@@ -7,12 +7,14 @@ class EditQuestion extends Component {
       {
         data: [],
         questionText: '',
+		questionTitle: '',
         questionID: '',
         questionPythonText: '',
         questionMathematicaText: ''
       }
 
     this.changeText = this.changeText.bind(this);
+	this.changeTitle = this.changeTitle.bind(this);
     this.changePythonText = this.changePythonText.bind(this);
     this.changeMathematicaText = this.changeMathematicaText.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,6 +30,7 @@ class EditQuestion extends Component {
         this.setState({
          
          questionText: findresponse.text,
+		 questionTitle: findresponse.title,
           questionID: findresponse.questionID,
           questionPythonText: findresponse.textPython,
           questionMathematicaText: findresponse.textMathematica
@@ -39,6 +42,9 @@ class EditQuestion extends Component {
 
   changeText(event) {
     this.setState({ questionText: event.target.value })
+  }
+  changeTitle(event){
+	   this.setState({ questionTitle: event.target.value })
   }
 
   changeMathematicaText(event) {
@@ -59,6 +65,7 @@ class EditQuestion extends Component {
       },
       body: JSON.stringify({
        text: this.state.questionText,
+	   title: this.state.questionTitle,
        questionID: this.state.questionID,
        textPython: this.state.questionPythonText,
        textMathematica: this.state.questionMathematicaText
@@ -85,6 +92,10 @@ class EditQuestion extends Component {
               <div className="form-group">
                 <label htmlFor="exampleInput1" className="bmd-label-floating">Post Title</label>
                 <input type="text" className="form-control" value={this.state.questionText} onChange={this.changeText} />
+              </div>
+			  <div className="form-group">
+                <label htmlFor="exampleInput4" className="bmd-label-floating">Question Title</label>
+                <textarea type="text" className="form-control" id="body" rows="3" value={this.state.questionTitle} onChange={this.changeTitle} ></textarea>
               </div>
 
               <div className="form-group">

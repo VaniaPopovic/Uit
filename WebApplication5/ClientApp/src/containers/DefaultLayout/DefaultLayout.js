@@ -57,12 +57,12 @@ class DefaultLayout extends Component {
 
 
        for (var i in result) {
-         var qs = {
+         var subject = {
            name: result[i].subjectName, icon: 'icon-pencil', children: [] };
          for (var k in result[i].chapter) {
 
            var ch = { name: result[i].chapter[k].chapterName, icon: 'icon-layers', children: [] };
-           qs.children.push(ch);
+           subject.children.push(ch);
            for (var j in result[i].chapter[k].questions) {
              var question = {
                name: result[i].chapter[k].questions[j].title, url: '/questions/' + result[i].chapter[k].questions[j].questionID, icon: 'icon-puzzle'
@@ -73,7 +73,7 @@ class DefaultLayout extends Component {
 
            }
          }
-         old.items.push(qs);
+         old.items.push(subject);
          console.log(old);
        }
         this.setState({
@@ -97,7 +97,6 @@ class DefaultLayout extends Component {
             <AppSidebarHeader />
             <AppSidebarForm />
             <AppSidebarNav navConfig={this.state.questions} {...this.props} />
-            {console.log(this.state.questions)}
             <AppSidebarFooter />
             <AppSidebarMinimizer />
           </AppSidebar>

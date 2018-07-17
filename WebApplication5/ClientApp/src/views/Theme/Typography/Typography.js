@@ -44,6 +44,7 @@ class Typography extends Component {
     this.onChange = this.onChange.bind(this);
     this.outf = this.outf.bind(this);
     this.builtinRead = this.builtinRead.bind(this);
+    this.resetEditor = this.resetEditor.bind(this);
   }
  
 
@@ -87,7 +88,10 @@ class Typography extends Component {
       throw "File not found: '" + x + "'";
     return Sk.builtinFiles["files"][x];
   }
-
+  resetEditor() {
+    console.log("this is called");
+    this.refs.ace.editor.setValue(`# This program prints Hello, world!` + `\nprint('Hello, world!')`,-1);
+  }
 
  
   componentDidMount() {
@@ -163,7 +167,7 @@ class Typography extends Component {
 
                   
                     <Button onClick={this.runit} outline color="primary" size="lg">Run</Button>{' '}
-                      <Button outline color="danger" size="lg">Clear</Button>{' '}
+                    <Button outline onClick={this.resetEditor} color="danger" size="lg">Clear</Button>{' '}
         
 
                
@@ -191,7 +195,7 @@ class Typography extends Component {
               <CardBody>
                 <Row>
                   <Col>
-                    <p className="form-control"  id="output" > </p>
+                    <p className="form-control"  id="output" >Sample output </p>
 
                     <div id="mycanvas"></div> 
                      

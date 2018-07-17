@@ -25,6 +25,7 @@ const EditQuestion = Loadable({
 });
 
 
+
 const ProgressBar = Loadable({
   loader: () => import('./views/Base/ProgressBar'),
   loading: Loading,

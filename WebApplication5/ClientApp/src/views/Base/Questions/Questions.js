@@ -3,6 +3,17 @@ import { Badge, Card, CardBody, CardFooter, CardHeader, Col, Row, Collapse, Fade
 import { Route, NavLink, HashRouter, BrowserRouter } from "react-router-dom";
 import { AppSwitch } from '@coreui/react'
 import AddQuestion from './AddQuestion';
+import AddChapter from './AddChapter';
+
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemTitle,
+  AccordionItemBody,
+} from 'react-accessible-accordion';
+
+
+
 
 
 class Questions extends Component {
@@ -15,7 +26,7 @@ class Questions extends Component {
     this.fetchData = this.fetchData.bind(this);
   }
   fetchData() {
-    fetch('api/Questions')
+    fetch('api/Subjects')
       .then((Response) => Response.json())
       .then((findresponse) => {
         // console.log(findresponse);
@@ -53,36 +64,90 @@ class Questions extends Component {
     this.fetchData();
   }
 
+
   render() {
     return (
       <div>
+        <Accordion>
+        {
+          this.state.questions.map(((subject, index) =>
+            <AccordionItem key={`${subject.subjectName}${index}`}>
+              
+                <AccordionItemTitle id="subjects">
+                  {subject.subjectName}
+                </AccordionItemTitle>
+                <AccordionItemBody>
+                  <Accordion>
+                    {
+                      subject.chapter.map(chapter => (
+                    <AccordionItem>
+                      <AccordionItemTitle id="chapters">
+                            {chapter.chapterName}
+                        
+                      </AccordionItemTitle>
+                          <AccordionItemBody>
+
+                            <Accordion>
+                              {
+                                chapter.questions.map(question => (
+                                  <AccordionItem>
+                                    <AccordionItemTitle id="questions">
+                                      {question.title}
+                                
+                                    </AccordionItemTitle>
+                                    <AccordionItemBody>
+                                    
+                                      <div className="card-body">
+                                        <h4 className="card-title">Question ID: {question.questionID}</h4>
+                                        <p className="card-text">Python text:  {question.textPython}</p>
+                                        <p className="card-text">Mathemtca text: {question.textMathematica}</p>
+                                        <NavLink className="btn btn-danger" to={"/base/editquestion/" + question.questionID}>Edit This Question</NavLink>
+                                        <a className="btn btn-danger" onClick={() => this.deleteQuestion(question.questionID)}>Delete This Question</a>
+                                        </div>
+                                    </AccordionItemBody>
+                                  </AccordionItem>
+                                 
+
+                                ))
+                              }
+                              <AccordionItem>
+                                <AccordionItemTitle id="addNew">ADD NEW</AccordionItemTitle>
+                                <AccordionItemBody>
+                                  <AddQuestion cId={chapter.chapterID}/>
+                                  </AccordionItemBody>
+                              </AccordionItem>
+                            </Accordion>
 
 
-          <AddQuestion/>
 
-       
-          
-          <div className="col-md-8">
-            {
-              this.state.questions.map((allQuestions, key) =>
-                <ul key={allQuestions.questionID}>
-                  <div className="card card-nav-tabs">
-                    <h4 className="card-header card-header-info">{allQuestions.text}</h4>
-                    <div className="card-body">
-                      <h4 className="card-title">Question ID: {allQuestions.questionID}</h4>
-                      <p className="card-text">Python text:  {allQuestions.textPython}</p>
-                      <p className="card-text">Mathemtca text: {allQuestions.textMathematica}</p>
-                      <NavLink className="btn btn-danger" to={"/base/editquestion/" + allQuestions.questionID}>Edit This Question</NavLink>
-                      <a className="btn btn-danger" onClick={() => this.deleteQuestion(allQuestions.questionID)}>Delete This Question</a>
-                    </div>
-                  </div>
-                </ul>
-              )
-            }
-          </div>
 
-        </div>
-      
+
+
+                        </AccordionItemBody>
+                        </AccordionItem>
+                      
+                      ))
+                    }
+                    <AccordionItem>
+                      <AccordionItemTitle id="addNew">ADD NEW</AccordionItemTitle>
+                      <AccordionItemBody>
+                        <AddChapter subjectID={subject.subjectID} />
+                      </AccordionItemBody>
+                    </AccordionItem>
+                  </Accordion>
+                 
+                </AccordionItemBody>
+           
+              </AccordionItem>
+            
+
+          ))
+          }
+          <AccordionItem>
+            <AccordionItemTitle id="addNew">ADD NEW</AccordionItemTitle>
+          </AccordionItem>
+        </Accordion>
+      </div>
     );
   }
 }

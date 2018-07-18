@@ -12,15 +12,13 @@ import {
   Table,
 } from 'reactstrap';
 
-class AddQuestion extends Component {
+class AddChapter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      qTitle: '',
-      qText: '',
-      qPython: '',
-      qMathematica: '',
-      qCid: this.props.cId
+      cName: '',
+      qQuestions: [],
+      sID: this.props.subjectID
     }
     this.logChange = this.logChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,14 +28,12 @@ class AddQuestion extends Component {
   handleSubmit(event) {
     event.preventDefault()
     var data = {
-      title: this.state.qTitle,
-      text: this.state.qText,
-      textPython: this.state.qPython,
-      textMathematica: this.state.qMathematica,
-      chapterID: this.state.qCid
+      chapterName: this.state.cName,
+      questions: this.state.questions,
+      subjectID: this.state.sID
     }
     console.log("Ti stello", data);
-    fetch("/api/Questions/",
+    fetch("/api/Chapters/",
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -65,17 +61,10 @@ class AddQuestion extends Component {
               <CardBody>
                 {
                   <form onSubmit={this.handleSubmit} method="POST">
-                    <label>Question Title</label>
-                    <input onChange={this.logChange} className="form-control" value={this.state.qTitle} name='qTitle' />
-                    <label>Question Text</label>
-                    <input onChange={this.logChange} className="form-control" value={this.state.qText} name='qText' />
-                    <label>Python</label>
-                    <input onChange={this.logChange} className="form-control" value={this.state.qPython} name='qPython' />
-                    <label>Mathematica Text</label>
-                    <input onChange={this.logChange} className="form-control" value={this.state.qMathematica} name='qMathematica' />
-                    <label>ChapterID</label>
-                    <input onChange={this.logChange} className="form-control" value={this.state.qCid} name='qCid' />
-
+                    <label>Chapter Name</label>
+                    <input onChange={this.logChange} className="form-control" value={this.state.cName} name='cName' />
+                    
+               
                     <div className="submit-section">
                       <button className="btn btn-uth-submit">Submit</button>
                     </div>
@@ -90,4 +79,4 @@ class AddQuestion extends Component {
     );
 
   }
-} export default AddQuestion;
+} export default AddChapter;

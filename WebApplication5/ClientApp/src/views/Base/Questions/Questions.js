@@ -2,23 +2,17 @@ import React, { Component } from 'react';
 import { Badge, Card, CardBody, CardFooter, CardHeader, Col, Row, Collapse, Fade } from 'reactstrap';
 import { Route, NavLink, HashRouter, BrowserRouter } from "react-router-dom";
 import { AppSwitch } from '@coreui/react'
+import AddQuestion from './AddQuestion';
 
 
 class Questions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions: [],
-      qTitle: '',
-      qText: '',
-      qPython: '',
-      qMathematica: '',
-      qCid:''
+      questions: []
     }
     this.deleteQuestion = this.deleteQuestion.bind(this);
     this.fetchData = this.fetchData.bind(this);
-    this.logChange = this.logChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
   fetchData() {
     fetch('api/Questions')
@@ -33,29 +27,6 @@ class Questions extends Component {
       })
   }
 
-  handleSubmit(event) {
-    event.preventDefault()
-    var data = {
-      title: this.state.qTitle,
-      text: this.state.qText,
-      textPython: this.state.qPython,
-      textMathematica: this.state.qMathematica,
-      chapterID: this.state.qCid
-    }
-    console.log("Ti stello", data)
-    fetch("/api/Questions/",
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        }).then((Response) => Response.json())
-      .then((result) => {
-        console.log("EMBIKE", result);
-      })
-}
-  logChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
   deleteQuestion(num) {
 
     console.log("FUCK UP",num);
@@ -86,34 +57,11 @@ class Questions extends Component {
     return (
       <div>
 
-        <div className="row">
 
-          <div className="col-md-2">
+          <AddQuestion/>
 
-          </div>
-
-          <div className="col-md-8">
-            {
-              <div className="container register-form">
-                <form onSubmit={this.handleSubmit} method="POST">
-                  <label>Question Title</label>
-                  <input onChange={this.logChange} className="form-control" value={this.state.qTitle}  name='qTitle'/>
-                  <label>Question Text</label>
-                  <input onChange={this.logChange} className="form-control" value={this.state.qText}  name='qText' />
-                  <label>Python</label>
-                  <input onChange={this.logChange} className="form-control" value={this.state.qPython}  name='qPython' />
-                  <label>Mathematica Text</label>
-                  <input onChange={this.logChange} className="form-control" value={this.state.qMathematica}  name='qMathematica' />
-                  <label>ChapterID</label>
-                  <input onChange={this.logChange} className="form-control" value={this.state.qCid}  name='qCid' />
-                 
-                  <div className="submit-section">
-                    <button className="btn btn-uth-submit">Submit</button>
-                  </div>
-                </form>
-              </div>
-            }
-          </div>
+       
+          
           <div className="col-md-8">
             {
               this.state.questions.map((allQuestions, key) =>
@@ -133,13 +81,8 @@ class Questions extends Component {
             }
           </div>
 
-          <div className="col-md-2">
-
-          </div>
-
         </div>
-
-      </div>
+      
     );
   }
 }

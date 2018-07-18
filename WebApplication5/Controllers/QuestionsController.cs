@@ -85,6 +85,7 @@ namespace WebApplication5.Controllers
         [HttpPost]
         public async Task<IActionResult> PostQuestion([FromBody] Question question)
         {
+            Console.WriteLine(question);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

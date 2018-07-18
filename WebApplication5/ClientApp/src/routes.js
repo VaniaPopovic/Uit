@@ -23,6 +23,10 @@ const EditQuestion = Loadable({
   loader: () => import('./views/Base/EditQuestion'),
   loading: Loading,
 });
+const AddSubject = Loadable({
+  loader: () => import('./views/Base/AddSubject'),
+  loading: Loading,
+});
 
 
 
@@ -85,6 +89,7 @@ const routes = [
   { path: '/questions/:id',exact: true, name: 'Question', component: Typography },
   { path: '/base', exact: true, name: 'Base', component: Questions },
   { path: '/base/questions', name: 'Questions', component: Questions },
+    { path: '/base/addsubject', name: 'AddSubject', component: AddSubject },
   { path: '/base/editquestion/:id', name: 'EditQuestion', component: EditQuestion },
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
   { path: '/base/progress-bar', name: 'Progress Bar', component: ProgressBar },

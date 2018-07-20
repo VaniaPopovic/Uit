@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import { history } from './_helpers';
+import { alertActions } from './_actions';
+import { PrivateRoute } from './_components';
+import { HomePage } from './HomePage';
+import { LoginPage } from './LoginPage';
+import { RegisterPage } from './RegisterPage';
 import './App.css';
 // Styles
 // CoreUI Icons Set
@@ -19,18 +26,31 @@ import { DefaultLayout } from './containers';
 // Pages
 import { Login, Page404, Page500, Register } from './views/Pages';
 
+
+
 // import { renderRoutes } from 'react-router-config';
 
 class App extends Component {
+	constructor(props) {
+        super(props);
+ 
+        const { dispatch } = this.props;
+        history.listen((location, action) => {
+            // clear alert on location change
+            dispatch(alertActions.clear());
+        });
+    }
   render() {
     return (
-	  	<HashRouter>
+	  	<HashRouter >
         <Switch>
-          <Route exact path="/login" name="Login Page" component={Login} />
-          <Route exact path="/register" name="Register Page" component={Register} />
+          <Route exact path="/login" name="Login Page" component={LoginPage} />
+          <Route exact path="/register" name="Register Page" component={RegisterPage} />
           <Route exact path="/404" name="Page 404" component={Page404} />
           <Route exact path="/500" name="Page 500" component={Page500} />
-          <Route path="/" name="Home" component={DefaultLayout} />
+         
+		      <PrivateRoute  path="/" component={DefaultLayout} />
+		    
         </Switch>
       </HashRouter>
      
@@ -38,4 +58,12 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+    const { alert } = state;
+    return {
+        alert
+    };
+}
+ 
+const connectedApp = connect(mapStateToProps)(App);
+export { connectedApp as App };

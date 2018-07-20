@@ -26,7 +26,7 @@ class Questions extends Component {
     this.fetchData = this.fetchData.bind(this);
   }
   fetchData() {
-    fetch('api/Subjects')
+    fetch('/api/Subjects')
       .then((Response) => Response.json())
       .then((findresponse) => {
         // console.log(findresponse);

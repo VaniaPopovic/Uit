@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Loadable from 'react-loadable'
 
 import { history } from './_helpers';
 import { alertActions } from './_actions';
@@ -25,8 +26,14 @@ import './scss/style.css'
 import { DefaultLayout } from './containers';
 // Pages
 import { Login, Page404, Page500, Register } from './views/Pages';
+function Loading() {
+  return <div>Loading...</div>;
+}
 
-
+const Dashboard = Loadable({
+  loader: () => import('./views/Dashboard'),
+  loading: Loading,
+});
 
 // import { renderRoutes } from 'react-router-config';
 
@@ -42,17 +49,20 @@ class App extends Component {
     }
   render() {
     return (
-	  	<HashRouter >
+      <Router history={history}>
         <Switch>
           <Route exact path="/login" name="Login Page" component={LoginPage} />
           <Route exact path="/register" name="Register Page" component={RegisterPage} />
           <Route exact path="/404" name="Page 404" component={Page404} />
           <Route exact path="/500" name="Page 500" component={Page500} />
          
-		      <PrivateRoute  path="/" component={DefaultLayout} />
+          <PrivateRoute path="/" component={DefaultLayout} />
+
+
+          <PrivateRoute path="/dashboard" component={Dashboard} />
 		    
         </Switch>
-      </HashRouter>
+      </Router>
      
     );
   }

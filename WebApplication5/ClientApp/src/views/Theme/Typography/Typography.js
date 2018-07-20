@@ -97,7 +97,7 @@ class Typography extends Component {
   componentDidMount() {
     this.state.value = this.refs.ace.editor.getValue();
     console.log("VALUEEEE", this.state.value);
-    fetch('api/Questions/' + this.props.match.params.id)
+    fetch('/api/Questions/' + this.props.match.params.id)
       .then((Response) => Response.json())
       .then((findresponse) => {
         console.log(findresponse);
@@ -118,7 +118,7 @@ class Typography extends Component {
     //console.log("called");
     if (this.props.match.params.id != prevProps.match.params.id) {
       this.state.value = this.refs.ace.editor.getValue();
-      fetch('api/Questions/' + this.props.match.params.id)
+      fetch('/api/Questions/' + this.props.match.params.id)
         .then((Response) => Response.json())
         .then((findresponse) => {
           console.log(findresponse);

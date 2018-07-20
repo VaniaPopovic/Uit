@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { userActions } from '../../_actions';
 
 import {
   AppAside,
@@ -126,5 +130,14 @@ class DefaultLayout extends Component {
     );
   }
 }
+function mapStateToProps(state) {
+  const { users, authentication } = state;
+  const { user } = authentication;
+  return {
+    user,
+    users
+  };
+}
 
-export default DefaultLayout;
+const connectedHomePage = connect(mapStateToProps)(DefaultLayout);
+export default connectedHomePage;

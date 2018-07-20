@@ -3,7 +3,8 @@ import Loadable from 'react-loadable'
 
 
 
-import DefaultLayout from './containers/DefaultLayout';
+import { requireAuthentication } from './requireAuthentication';
+import {connectedHomePage}   from './HomePage/';
 
 function Loading() {
   return <div>Loading...</div>;
@@ -11,6 +12,11 @@ function Loading() {
 
 const Breadcrumbs = Loadable({
   loader: () => import('./views/Base/Breadcrumbs'),
+  loading: Loading,
+});
+
+const Login = Loadable({
+  loader: () => import('./views/Pages/Login/'),
   loading: Loading,
 });
 
@@ -84,7 +90,7 @@ const User = Loadable({
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
-  { path: '/', exact: true, name: 'Home', component: DefaultLayout },
+  { path: '/default', exact: true, name: 'Home', component: connectedHomePage },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/questions/:id',exact: true, name: 'Question', component: Typography },
   { path: '/base', exact: true, name: 'Base', component: Questions },

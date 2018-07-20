@@ -22,7 +22,7 @@ class EditQuestion extends Component {
   }
   componentDidMount() {
   
-    fetch('api/Questions/' + this.props.match.params.id)
+    fetch('/api/Questions/' + this.props.match.params.id)
       .then((Response) => Response.json())
       .then((findresponse) => {
         console.log(findresponse.text)
@@ -57,7 +57,7 @@ class EditQuestion extends Component {
 
   handleSubmit(event) {
 
-    fetch('api/Questions/' + this.props.match.params.id, {
+    fetch('/api/Questions/' + this.props.match.params.id, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',

@@ -96,7 +96,7 @@ namespace WebApplication5
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -8,9 +8,9 @@ import { App } from './App';
 // disable ServiceWorker
 import registerServiceWorker from './registerServiceWorker';
 
-import { configureFakeBackend } from './_helpers';
+//import { configureFakeBackend } from './_helpers';
 
-configureFakeBackend();
+//configureFakeBackend();
 
 
 ReactDOM.render(   <Provider store={store}>

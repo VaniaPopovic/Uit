@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import brace from 'brace';
 import AceEditor from 'react-ace';
 import Sk from 'skulpt';
+import classnames from 'classnames';
 
 import 'brace/theme/monokai';
 import 'brace/mode/python';
@@ -9,6 +10,8 @@ import 'brace/mode/javascript';
 import 'brace/ext/language_tools';
 
 import {
+  TabContent,
+  TabPane,
   Button,
   ButtonDropdown,
   ButtonGroup,
@@ -22,7 +25,8 @@ import {
   Progress,
   Row,
   Table,
-  
+  Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink,
+  Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 
 
@@ -31,34 +35,57 @@ import {
 // output functions are configurable.  This one just appends some text
 // to a pre element.
 
+var callback = function (key) {
+}
 
 class Typography extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       value: "",
-      questions: []
+      questions: [],
+      activetab: '1',
+      modal: false
     }
 
-  
+
     this.runit = this.runit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.outf = this.outf.bind(this);
     this.builtinRead = this.builtinRead.bind(this);
     this.resetEditor = this.resetEditor.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
- 
+
+
+  toggleModal() {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+
+
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
+    }
+  }
+
 
   onChange(newValue) {
 
     this.state.value = newValue;
     console.log('change', this.state.value);
   }
-// Here's everything you need to run a python program in skulpt
-// grab the code from your textarea
-// get a reference to your pre element for output
-// configure the output function
-// call Sk.importMainWithBody()
+  // Here's everything you need to run a python program in skulpt
+  // grab the code from your textarea
+  // get a reference to your pre element for output
+  // configure the output function
+  // call Sk.importMainWithBody()
   runit() {
 
     var prog = this.state.value;
@@ -71,19 +98,19 @@ class Typography extends Component {
       return Sk.importMainWithBody("<stdin>", false, prog, true);
     });
     myPromise.then(function (mod) {
-        console.log('success');
-      },
+      console.log('success');
+    },
       function (err) {
         console.log(err.toString());
       });
-   
+
   }
-   outf(text) {
+  outf(text) {
     var mypre = document.getElementById("output");
     console.log("ETO", text);
-     var txt = document.createTextNode(text);
-     mypre.appendChild(txt);
-   }
+    var txt = document.createTextNode(text);
+    mypre.appendChild(txt);
+  }
   builtinRead(x) {
     if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
       throw "File not found: '" + x + "'";
@@ -91,10 +118,10 @@ class Typography extends Component {
   }
   resetEditor() {
     console.log("this is called");
-    this.refs.ace.editor.setValue(`# This program prints Hello, world!` + `\nprint('Hello, world!')`,-1);
+    this.refs.ace.editor.setValue(`# This program prints Hello, world!` + `\nprint('Hello, world!')`, -1);
   }
 
- 
+
   componentDidMount() {
     this.state.value = this.refs.ace.editor.getValue();
     console.log("VALUEEEE", this.state.value);
@@ -113,7 +140,7 @@ class Typography extends Component {
 
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
-    
+
     //console.log("current",this.props.match.params.id);
     //console.log("prev", prevProps.match.params.id);
     //console.log("called");
@@ -131,8 +158,10 @@ class Typography extends Component {
         })
     }
   }
+
+
   render() {
-   
+
 
     return (
       <div className="animated fadeIn">
@@ -140,7 +169,7 @@ class Typography extends Component {
           <Col>
             <Card>
               <CardHeader>
-               { this.state.questions.title}
+                {this.state.questions.title}
               </CardHeader>
               <CardBody>
                 <Row>
@@ -157,7 +186,7 @@ class Typography extends Component {
                       showPrintMargin={true}
                       showGutter={true}
                       highlightActiveLine={true}
-                      value={`# This program prints Hello, world!` +`\nprint('Hello, world!')`}
+                      value={`# This program prints Hello, world!` + `\nprint('Hello, world!')`}
                       setOptions={{
                         enableBasicAutocompletion: true,
                         enableLiveAutocompletion: true,
@@ -166,24 +195,68 @@ class Typography extends Component {
                         tabSize: 2,
                       }} />
 
-                  
+
                     <Button onClick={this.runit} outline color="primary" size="lg">Run</Button>{' '}
                     <Button outline onClick={this.resetEditor} color="danger" size="lg">Clear</Button>{' '}
-        
 
-               
+
+
                   </Col>
                   <Col>
+                    <div>
+                      <Nav tabs>
+                        <NavItem>
+                          <NavLink
+                            className={classnames({ active: this.state.activeTab === '1' })}
+                            onClick={() => { this.toggle('1'); }}
+                          >
+                            Python
+                  </NavLink>
+                        </NavItem>
+                        <NavItem>
+                          <NavLink
+                            className={classnames({ active: this.state.activeTab === '2' })}
+                            onClick={() => { this.toggle('2'); }}
+                          >
+                            Mathematica
+                  </NavLink>
+                        </NavItem>
+                      </Nav>
+                      <TabContent activeTab={this.state.activeTab}>
+                        <TabPane tabId="1">
+                          <Row>
+                            <Col sm="12">
+                              <p className="card-text">{this.state.questions.text}</p>
+                              <Button outline color="info" onClick={this.toggleModal}>Help</Button>{' '}
+                              <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+                                <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader>
+                                <ModalBody>
+                                  <p>{this.state.questions.textPython}</p>
+                                </ModalBody>
+                                <ModalFooter>
+                                  <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
+                                </ModalFooter>
+                              </Modal>
 
-                    <h4>{this.state.questions.text}</h4>
-                    <p className="card-text">Python text:  {this.state.questions.textPython}</p>
-                    <p className="card-text" id="out">Mathemtca text: {this.state.questions.textMathematica}</p>
-                     <Button outline color="info">Help</Button>{' '}
+                            </Col>
+                          </Row>
+                        </TabPane>
+                        <TabPane tabId="2">
+                          <Row>
+                            <Col sm="6">
+                              <p className="card-text" id="out">{this.state.questions.textMathematica}</p>
+                              <Button outline color="info">H</Button>{' '}
+                            </Col>
+                          </Row>
+                        </TabPane>
+                      </TabContent>
+                    </div>
+
                   </Col>
                 </Row>
-           
-                  
-     
+
+
+
               </CardBody>
             </Card>
           </Col>
@@ -193,14 +266,12 @@ class Typography extends Component {
             <Card>
               <CardHeader>
                 Output
-              </CardHeader>
+                    </CardHeader>
               <CardBody>
                 <Row>
                   <Col>
-                    <p className="form-control"  id="output" >Sample output </p>
-
-                    <div id="mycanvas"></div> 
-                     
+                    <p className="form-control" id="output" >Sample output </p>
+                    <div id="mycanvas"></div>
                   </Col>
                 </Row>
               </CardBody>

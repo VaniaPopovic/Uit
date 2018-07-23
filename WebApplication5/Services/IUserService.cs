@@ -69,6 +69,7 @@ namespace WebApplication5.Services
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.Role = 1;
 
             _context.Users.Add(user);
             _context.SaveChanges();
@@ -94,7 +95,7 @@ namespace WebApplication5.Services
             user.FirstName = userParam.FirstName;
             user.LastName = userParam.LastName;
             user.Username = userParam.Username;
-
+            user.Role = 1;
             // update password if it was entered
             if (!string.IsNullOrWhiteSpace(password))
             {

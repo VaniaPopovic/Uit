@@ -29,26 +29,48 @@ import DefaultHeader from './DefaultHeader';
 class DefaultLayout extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      questions: {
-        items: [
-          {
-            name: 'Dashboard',
-            url: '/dashboard',
-            icon: 'icon-speedometer'
-          },
-          {
-            title: true,
-            name: 'Modules'
-          },
-          {
-            name: 'Questions',
-            url: '/base/questions',
-            icon: 'icon-pencil'
-          }
-        ]
+    let user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
+    if (user.role === 2) {
+      this.state = {
+        questions: {
+          items: [
+            {
+              name: 'Dashboard',
+              url: '/dashboard',
+              icon: 'icon-speedometer'
+            },
+            {
+              title: true,
+              name: 'Modules'
+            },
+            {
+              name: 'Questions',
+              url: '/base/questions',
+              icon: 'icon-pencil'
+            }
+          ]
+        }
       }
+    } else {
+      this.state = {
+        questions: {
+          items: [
+            {
+              name: 'Dashboard',
+              url: '/dashboard',
+              icon: 'icon-speedometer'
+            },
+            {
+              title: true,
+              name: 'Modules'
+            }
+          ]
+        }
+      }
+
     }
+    
   }
 
 

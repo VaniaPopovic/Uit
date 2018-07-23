@@ -29,17 +29,8 @@ const EditQuestion = Loadable({
   loader: () => import('./views/Base/EditQuestion'),
   loading: Loading,
 });
-const AddSubject = Loadable({
-  loader: () => import('./views/Base/AddSubject'),
-  loading: Loading,
-});
 
 
-
-const ProgressBar = Loadable({
-  loader: () => import('./views/Base/ProgressBar'),
-  loading: Loading,
-});
 
 
 const Dashboard = Loadable({
@@ -47,29 +38,15 @@ const Dashboard = Loadable({
   loading: Loading,
 });
 
-const CoreUIIcons = Loadable({
-  loader: () => import('./views/Icons/CoreUIIcons'),
-  loading: Loading,
-});
 
 
 
-const FontAwesome = Loadable({
-  loader: () => import('./views/Icons/FontAwesome'),
-  loading: Loading,
-});
-
-const SimpleLineIcons = Loadable({
-  loader: () => import('./views/Icons/SimpleLineIcons'),
-  loading: Loading,
-});
 
 
 
-const Colors = Loadable({
-  loader: () => import('./views/Theme/Colors'),
-  loading: Loading,
-});
+
+
+
 
 const Typography = Loadable({
   loader: () => import('./views/Theme/Typography'),
@@ -95,14 +72,8 @@ const routes = [
   { path: '/questions/:id',exact: true, name: 'Question', component: Typography },
   { path: '/base', exact: true, name: 'Base', component: Questions },
   { path: '/base/questions', name: 'Questions', component: Questions },
-    { path: '/base/addsubject', name: 'AddSubject', component: AddSubject },
   { path: '/base/editquestion/:id', name: 'EditQuestion', component: EditQuestion },
   { path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
-  { path: '/base/progress-bar', name: 'Progress Bar', component: ProgressBar },
-  { path: '/icons', exact: true, name: 'Icons', component: CoreUIIcons },
-  { path: '/icons/coreui-icons', name: 'CoreUI Icons', component: CoreUIIcons },
-  { path: '/icons/font-awesome', name: 'Font Awesome', component: FontAwesome },
-  { path: '/icons/simple-line-icons', name: 'Simple Line Icons', component: SimpleLineIcons },
   { path: '/users', exact: true,  name: 'Users', component: Users }
 ];
 

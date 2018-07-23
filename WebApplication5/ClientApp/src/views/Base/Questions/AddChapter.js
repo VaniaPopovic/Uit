@@ -41,6 +41,7 @@ class AddChapter extends Component {
         }).then((Response) => Response.json())
       .then((result) => {
         console.log("EMBIKE", result);
+        window.location.reload();
       })
   }
 

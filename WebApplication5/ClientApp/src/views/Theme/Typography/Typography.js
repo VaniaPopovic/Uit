@@ -22,6 +22,7 @@ import {
   Progress,
   Row,
   Table,
+  
 } from 'reactstrap';
 
 
@@ -173,6 +174,7 @@ class Typography extends Component {
                
                   </Col>
                   <Col>
+
                     <h4>{this.state.questions.text}</h4>
                     <p className="card-text">Python text:  {this.state.questions.textPython}</p>
                     <p className="card-text" id="out">Mathemtca text: {this.state.questions.textMathematica}</p>

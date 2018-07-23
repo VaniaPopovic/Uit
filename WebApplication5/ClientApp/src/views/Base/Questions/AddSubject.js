@@ -12,15 +12,12 @@ import {
   Table,
 } from 'reactstrap';
 
-class AddQuestion extends Component {
+class AddSubject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      qTitle: '',
-      qText: '',
-      qPython: '',
-      qMathematica: '',
-      qCid: this.props.cId
+      sName: '',
+      sChapters: []
     }
     this.logChange = this.logChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,14 +27,11 @@ class AddQuestion extends Component {
   handleSubmit(event) {
     event.preventDefault()
     var data = {
-      title: this.state.qTitle,
-      text: this.state.qText,
-      textPython: this.state.qPython,
-      textMathematica: this.state.qMathematica,
-      chapterID: this.state.qCid
+      subjectName: this.state.sName,
+      chapter: this.state.sChapters
     }
     console.log("Ti stello", data);
-    fetch("/api/Questions/",
+    fetch("/api/Subjects/",
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -61,21 +55,14 @@ class AddQuestion extends Component {
           <Col>
             <Card>
               <CardHeader>
-                Add Question
+                Add Subject
               </CardHeader>
               <CardBody>
                 {
                   <form onSubmit={this.handleSubmit} method="POST">
-                    <label>Question Title</label>
-                    <input onChange={this.logChange} className="form-control" value={this.state.qTitle} name='qTitle' />
-                    <label>Question Text</label>
-                    <input onChange={this.logChange} className="form-control" value={this.state.qText} name='qText' />
-                    <label>Python</label>
-                    <input onChange={this.logChange} className="form-control" value={this.state.qPython} name='qPython' />
-                    <label>Mathematica Text</label>
-                    <input onChange={this.logChange} className="form-control" value={this.state.qMathematica} name='qMathematica' />
-                    <label>ChapterID</label>
-                    <input onChange={this.logChange} className="form-control" value={this.state.qCid} name='qCid' />
+                    <label>Subject Name</label>
+                    <input onChange={this.logChange} className="form-control" value={this.state.sName} name='sName' />
+
 
                     <div className="submit-section">
                       <button className="btn btn-uth-submit">Submit</button>
@@ -91,4 +78,4 @@ class AddQuestion extends Component {
     );
 
   }
-} export default AddQuestion;
+} export default AddSubject;

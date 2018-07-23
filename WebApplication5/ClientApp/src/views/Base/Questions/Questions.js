@@ -4,6 +4,7 @@ import { Route, NavLink, HashRouter, BrowserRouter } from "react-router-dom";
 import { AppSwitch } from '@coreui/react'
 import AddQuestion from './AddQuestion';
 import AddChapter from './AddChapter';
+import AddSubject from './AddSubject'
 
 import {
   Accordion,
@@ -55,7 +56,7 @@ class Questions extends Component {
       }
     console.log("up", updatedQs);
     this.setState({
-      questions: updatedQs
+      questions: this.fetchData()
 
     })
 
@@ -145,6 +146,9 @@ class Questions extends Component {
           }
           <AccordionItem>
             <AccordionItemTitle id="addNew">ADD NEW</AccordionItemTitle>
+            <AccordionItemBody>
+              <AddSubject/>
+            </AccordionItemBody>
           </AccordionItem>
         </Accordion>
       </div>

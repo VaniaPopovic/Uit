@@ -41,7 +41,8 @@ class Typography extends Component {
       value: "",
       questions: [],
       activeTab: '1',
-      modal: false
+      modalPython: false,
+      modalMathematica: false
     }
 
 
@@ -51,13 +52,21 @@ class Typography extends Component {
     this.builtinRead = this.builtinRead.bind(this);
     this.resetEditor = this.resetEditor.bind(this);
     this.toggle = this.toggle.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleModalPython = this.toggleModalPython.bind(this);
+    this.toggleModalMathematica = this.toggleModalMathematica.bind(this);
+
   }
 
 
-  toggleModal() {
+  toggleModalPython() {
     this.setState({
-      modal: !this.state.modal
+      modalPython: !this.state.modalPython
+    });
+  }
+
+ toggleModalMathematica() {
+    this.setState({
+      modalMathematica: !this.state.modalMathematica
     });
   }
 
@@ -222,14 +231,14 @@ class Typography extends Component {
                           <Row>
                             <Col sm="12">
                               <p className="card-text">{this.state.questions.text}</p>
-                              <Button outline color="info" onClick={this.toggleModal}>Help</Button>{' '}
-                              <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
-                                <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader>
+                              <Button outline color="info" onClick={this.toggleModalPython}>Hint</Button>{' '}
+                              <Modal isOpen={this.state.modalPython} toggle={this.toggleModalPython} className={this.props.className}>
+                                <ModalHeader toggle={this.toggleModalPython}>Modal title</ModalHeader>
                                 <ModalBody>
                                   <p>{this.state.questions.textPython}</p>
                                 </ModalBody>
                                 <ModalFooter>
-                                  <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
+                                  <Button color="secondary" onClick={this.toggleModalPython}>Cancel</Button>
                                 </ModalFooter>
                               </Modal>
 
@@ -239,8 +248,18 @@ class Typography extends Component {
                         <TabPane tabId="2">
                           <Row>
                             <Col sm="6">
-                              <p className="card-text" id="out">{this.state.questions.textMathematica}</p>
-                              <Button outline color="info">H</Button>{' '}
+
+                              <p className="card-text" id="out">{this.state.questions.text}</p>
+                              <Button outline color="info" onClick={this.toggleModalMathematica}>Hint</Button>{' '}
+                               <Modal isOpen={this.state.modalMathematica} toggle={this.toggleModalMathematica} className={this.props.className}>
+                                <ModalHeader toggle={this.toggleModalMathematica}>Modal title</ModalHeader>
+                                <ModalBody>
+                                  <p>{this.state.questions.textMathematica}</p>
+                                </ModalBody>
+                                <ModalFooter>
+                                  <Button color="secondary" onClick={this.toggleModalMathematica}>Cancel</Button>
+                                </ModalFooter>
+                              </Modal>
                             </Col>
                           </Row>
                         </TabPane>

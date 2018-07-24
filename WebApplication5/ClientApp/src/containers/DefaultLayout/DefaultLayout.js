@@ -30,7 +30,7 @@ class DefaultLayout extends Component {
   constructor(props) {
     super(props);
     let user = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
+  //  console.log(user);
     if (user.role === 2) {
       this.state = {
         questions: {
@@ -100,7 +100,7 @@ class DefaultLayout extends Component {
            }
          }
          old.items.push(subject);
-         console.log(old);
+       //  console.log(old);
        }
         this.setState({
           questions: old

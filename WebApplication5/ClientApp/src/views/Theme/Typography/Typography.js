@@ -40,7 +40,7 @@ class Typography extends Component {
     this.state = {
       value: "",
       questions: [],
-      activetab: '1',
+      activeTab: '1',
       modal: false
     }
 

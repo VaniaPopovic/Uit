@@ -81,7 +81,7 @@ class Questions extends Component {
                   <Accordion>
                     {
                       subject.chapter.map(chapter => (
-                    <AccordionItem>
+                        <AccordionItem key={chapter.chapterID}>
                       <AccordionItemTitle id="chapters">
                             {chapter.chapterName}
                         
@@ -91,7 +91,7 @@ class Questions extends Component {
                             <Accordion>
                               {
                                 chapter.questions.map(question => (
-                                  <AccordionItem>
+                                  <AccordionItem key={question.questionID}>
                                     <AccordionItemTitle id="questions">
                                       {question.title}
                                 

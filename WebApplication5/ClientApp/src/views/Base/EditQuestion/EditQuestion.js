@@ -7,14 +7,15 @@ class EditQuestion extends Component {
       {
         data: [],
         questionText: '',
-		questionTitle: '',
+		    questionTitle: '',
         questionID: '',
         questionPythonText: '',
-        questionMathematicaText: ''
+        questionMathematicaText: '',
+        qCID: ''
       }
 
     this.changeText = this.changeText.bind(this);
-	this.changeTitle = this.changeTitle.bind(this);
+	  this.changeTitle = this.changeTitle.bind(this);
     this.changePythonText = this.changePythonText.bind(this);
     this.changeMathematicaText = this.changeMathematicaText.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,15 +26,16 @@ class EditQuestion extends Component {
     fetch('/api/Questions/' + this.props.match.params.id)
       .then((Response) => Response.json())
       .then((findresponse) => {
-        console.log(findresponse.text)
+        console.log("Edit question debug",findresponse)
      
         this.setState({
          
-         questionText: findresponse.text,
-		 questionTitle: findresponse.title,
+          questionText: findresponse.text,
+		      questionTitle: findresponse.title,
           questionID: findresponse.questionID,
           questionPythonText: findresponse.textPython,
-          questionMathematicaText: findresponse.textMathematica
+          questionMathematicaText: findresponse.textMathematica,
+          qCID: findresponse.chapterID
         
         })
       })
@@ -65,10 +67,12 @@ class EditQuestion extends Component {
       },
       body: JSON.stringify({
        text: this.state.questionText,
-	   title: this.state.questionTitle,
+	     title: this.state.questionTitle,
        questionID: this.state.questionID,
        textPython: this.state.questionPythonText,
-       textMathematica: this.state.questionMathematicaText
+        textMathematica: this.state.questionMathematicaText,
+       chapterID: this.state.qCID
+
 
       })
     })
@@ -88,7 +92,7 @@ class EditQuestion extends Component {
           <h4 className="card-header card-header-info">Edit Your Post</h4>
           <div className="card-body">
             <h4 className="card-title">Post ID: {this.state.questionID}</h4>
-            <p className="card-text">
+           
               <div className="form-group">
                 <label htmlFor="exampleInput1" className="bmd-label-floating">Post Title</label>
                 <input type="text" className="form-control" value={this.state.questionText} onChange={this.changeText} />
@@ -106,7 +110,7 @@ class EditQuestion extends Component {
                 <label htmlFor="exampleInput2" className="bmd-label-floating">Mathematica Text</label>
                 <textarea type="text" className="form-control" id="body" rows="3" value={this.state.questionMathematicaText} onChange={this.changeMathematicaText} ></textarea>
               </div>
-            </p>
+            
             <div>
               <div className="form-group">
                 <button type="submit" className="btn btn-info" onClick={this.handleSubmit} >Edit Question</button>

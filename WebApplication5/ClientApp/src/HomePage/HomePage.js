@@ -14,7 +14,7 @@ class HomePage extends React.Component {
     }
 
     render() {
-        const { user, users } = this.props;
+        const { user } = this.props;
         return (
             <div className="col-md-6 col-md-offset-3">
                 <h1>Hi {user.firstName}!</h1>
@@ -27,11 +27,10 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { users, authentication } = state;
+    const {  authentication } = state;
     const { user } = authentication;
     return {
-        user,
-        users
+        user
     };
 }
 

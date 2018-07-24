@@ -43,22 +43,15 @@ class Questions extends Component {
 
     console.log("FUCK UP",num);
     
- fetch('api/Questions/' + num,
+ fetch('/api/Questions/' + num,
    {
      method: 'DELETE'
 
-      })
-    var updatedQs = this.state.questions;
-    for (var i = 0; i < updatedQs.length; i++)
-      if (updatedQs[i].questionID === num) {
-        updatedQs.splice(i, 1);
-        break;
-      }
-    console.log("up", updatedQs);
-    this.setState({
-      questions: this.fetchData()
-
-    })
+   }).then((Response) => Response.json())
+   .then((result) => {
+     console.log("EFKIKE", result);
+     window.location.reload();
+   })
 
   }
   componentDidMount() {

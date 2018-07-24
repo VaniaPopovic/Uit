@@ -1,24 +1,11 @@
 import React from 'react';
 import Loadable from 'react-loadable'
 
-
-
-import { requireAuthentication } from './requireAuthentication';
 import {connectedHomePage}   from './HomePage/';
 
 function Loading() {
   return <div>Loading...</div>;
 }
-
-const Breadcrumbs = Loadable({
-  loader: () => import('./views/Base/Breadcrumbs'),
-  loading: Loading,
-});
-
-const Login = Loadable({
-  loader: () => import('./views/Pages/Login/'),
-  loading: Loading,
-});
 
 const Questions = Loadable({
   loader: () => import('./views/Base/Questions'),
@@ -30,38 +17,15 @@ const EditQuestion = Loadable({
   loading: Loading,
 });
 
-
-
-
 const Dashboard = Loadable({
   loader: () => import('./views/Dashboard'),
   loading: Loading,
 });
-
-
-
-
-
-
-
-
-
-
-
 const Typography = Loadable({
   loader: () => import('./views/Theme/Typography'),
   loading: Loading,
 });
 
-const Users = Loadable({
-  loader: () => import('./views/Users/Users'),
-  loading: Loading,
-});
-
-const User = Loadable({
-  loader: () => import('./views/Users/User'),
-  loading: Loading,
-});
 
 
 
@@ -73,8 +37,6 @@ const routes = [
   { path: '/base', exact: true, name: 'Base', component: Questions },
   { path: '/base/questions', name: 'Questions', component: Questions },
   { path: '/base/editquestion/:id', name: 'EditQuestion', component: EditQuestion },
-  { path: '/base/breadcrumbs', name: 'Breadcrumbs', component: Breadcrumbs },
-  { path: '/users', exact: true,  name: 'Users', component: Users }
 ];
 
 export default routes;

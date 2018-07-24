@@ -6,7 +6,6 @@ import Loadable from 'react-loadable'
 import { history } from './_helpers';
 import { alertActions } from './_actions';
 import { PrivateRoute } from './_components';
-import { HomePage } from './HomePage';
 import { LoginPage } from './LoginPage';
 import { RegisterPage } from './RegisterPage';
 import './App.css';
@@ -25,7 +24,7 @@ import './scss/style.css'
 // Containers
 import { DefaultLayout } from './containers';
 // Pages
-import { Login, Page404, Page500, Register } from './views/Pages';
+import { Page404, Page500, } from './views/Pages';
 function Loading() {
   return <div>Loading...</div>;
 }

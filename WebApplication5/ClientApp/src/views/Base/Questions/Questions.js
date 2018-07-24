@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Badge, Card, CardBody, CardFooter, CardHeader, Col, Row, Collapse, Fade } from 'reactstrap';
-import { Route, NavLink, HashRouter, BrowserRouter } from "react-router-dom";
-import { AppSwitch } from '@coreui/react'
+//import { Col, Row, Collapse, Fade } from 'reactstrap';
+import { NavLink } from "react-router-dom";
+//import { AppSwitch } from '@coreui/react'
 import AddQuestion from './AddQuestion';
 import AddChapter from './AddChapter';
 import AddSubject from './AddSubject'

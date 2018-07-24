@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import {
-  Button,
+ 
   Card,
   CardBody,
-  CardFooter,
+
   CardHeader,
-  CardTitle,
   Col,
-  Progress,
   Row,
-  Table,
+
 } from 'reactstrap';
 
 class AddChapter extends Component {

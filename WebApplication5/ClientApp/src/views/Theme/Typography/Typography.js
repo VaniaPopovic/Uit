@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import brace from 'brace';
+//import brace from 'brace';
 import AceEditor from 'react-ace';
 import Sk from 'skulpt';
 import classnames from 'classnames';
@@ -13,19 +13,12 @@ import {
   TabContent,
   TabPane,
   Button,
-  ButtonDropdown,
-  ButtonGroup,
-  ButtonToolbar,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
-  CardTitle,
   Col,
-  Progress,
   Row,
-  Table,
-  Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink,
+  Nav, NavItem, NavLink,
   Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 
@@ -35,8 +28,8 @@ import {
 // output functions are configurable.  This one just appends some text
 // to a pre element.
 
-var callback = function (key) {
-}
+//var callback = function (key) {
+//}
 
 class Typography extends Component {
   constructor(props) {
@@ -77,8 +70,10 @@ class Typography extends Component {
 
 
   onChange(newValue) {
-
-    this.state.value = newValue;
+    this.setState({
+      value: newValue
+  });
+    //this.state.value = newValue;
     console.log('change', this.state.value);
   }
   // Here's everything you need to run a python program in skulpt
@@ -107,7 +102,7 @@ class Typography extends Component {
   }
   outf(text) {
     var mypre = document.getElementById("output");
-    console.log("ETO", text);
+    console.log("Programming panel debug", text);
     var txt = document.createTextNode(text);
     mypre.appendChild(txt);
   }
@@ -123,7 +118,10 @@ class Typography extends Component {
 
 
   componentDidMount() {
-    this.state.value = this.refs.ace.editor.getValue();
+    this.setState({
+      value: this.refs.ace.editor.getValue()
+    });
+    //this.state.value = this.refs.ace.editor.getValue();
     console.log("VALUEEEE", this.state.value);
     fetch('/api/Questions/' + this.props.match.params.id)
       .then((Response) => Response.json())
@@ -144,8 +142,11 @@ class Typography extends Component {
     //console.log("current",this.props.match.params.id);
     //console.log("prev", prevProps.match.params.id);
     //console.log("called");
-    if (this.props.match.params.id != prevProps.match.params.id) {
-      this.state.value = this.refs.ace.editor.getValue();
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.setState({
+        value: this.refs.ace.editor.getValue()
+      });
+     // this.state.value = this.refs.ace.editor.getValue();
       fetch('/api/Questions/' + this.props.match.params.id)
         .then((Response) => Response.json())
         .then((findresponse) => {

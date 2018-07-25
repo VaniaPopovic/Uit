@@ -13,7 +13,9 @@ class AddQuestion extends Component {
     super(props);
     this.state = {
       qTitle: '',
-      qText: '',
+      qHelpP: '',
+      qHelpM: '',
+      qCorrectAnswer:'',
       qPython: '',
       qMathematica: '',
       qCid: this.props.cId
@@ -27,7 +29,8 @@ class AddQuestion extends Component {
     event.preventDefault()
     var data = {
       title: this.state.qTitle,
-      text: this.state.qText,
+        helpPython: this.state.qHelpP,
+      helpMathematica: this.state.qHelpM,
       textPython: this.state.qPython,
       textMathematica: this.state.qMathematica,
       chapterID: this.state.qCid
@@ -64,14 +67,15 @@ class AddQuestion extends Component {
                   <form onSubmit={this.handleSubmit} method="POST">
                     <label>Question Title</label>
                     <input onChange={this.logChange} className="form-control" value={this.state.qTitle} name='qTitle' />
-                    <label>Question Text</label>
-                    <input onChange={this.logChange} className="form-control" value={this.state.qText} name='qText' />
-                    <label>Python</label>
+                    <label>Python Text</label>
                     <input onChange={this.logChange} className="form-control" value={this.state.qPython} name='qPython' />
                     <label>Mathematica Text</label>
-                    <input onChange={this.logChange} className="form-control" value={this.state.qMathematica} name='qMathematica' />
-                    <label>ChapterID</label>
-                    <input onChange={this.logChange} className="form-control" value={this.state.qCid} name='qCid' />
+                                    <input onChange={this.logChange} className="form-control" value={this.state.qMathematica} name='qMathematica' />
+                    <label>Python Help</label>
+                                    <input onChange={this.logChange} className="form-control" value={this.state.qHelpP} name='qHelpP' />
+                    <label>Mathematica Help</label>
+                    <input onChange={this.logChange} className="form-control" value={this.state.qHelpM} name='qHelpM' />
+                   
 
                     <div className="submit-section">
                       <button className="btn btn-uth-submit">Submit</button>

@@ -10,7 +10,8 @@
   </PropertyGroup>
   
   <PropertyGroup>     
-  <TargetLatestAspNetCoreRuntimePatch>true</TargetLatestAspNetCoreRuntimePatch>
+  <TargetLatestAspNetCoreRuntimePatch>true</TargetLatestAspNetCoreRuntimePatch>     
+  <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
 </PropertyGroup>
 
   <ItemGroup>

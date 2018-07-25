@@ -38,7 +38,8 @@ namespace WebApplication5
             });
             var connection = @"Data Source=DESKTOP-7BV2G10\;Initial Catalog=UiT;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<UitContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("OnlineDatabase")));
+                options.UseSqlServer(connection));
+            //Configuration.GetConnectionString("OnlineDatabase")
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);

@@ -33,6 +33,7 @@ class AddQuestion extends Component {
       helpMathematica: this.state.qHelpM,
       textPython: this.state.qPython,
       textMathematica: this.state.qMathematica,
+      correctAnswer: this.state.qCorrectAnswer,
       chapterID: this.state.qCid
     }
     console.log("Ti stello", data);
@@ -73,9 +74,11 @@ class AddQuestion extends Component {
                                     <input onChange={this.logChange} className="form-control" value={this.state.qMathematica} name='qMathematica' />
                     <label>Python Help</label>
                                     <input onChange={this.logChange} className="form-control" value={this.state.qHelpP} name='qHelpP' />
+                     
                     <label>Mathematica Help</label>
                     <input onChange={this.logChange} className="form-control" value={this.state.qHelpM} name='qHelpM' />
-                   
+                   <label>Correct answer Python</label>
+                     <input onChange={this.logChange} className="form-control" value={this.state.qCorrectAnswer} name='qCorrectAnswer' />
 
                     <div className="submit-section">
                       <button className="btn btn-uth-submit">Submit</button>

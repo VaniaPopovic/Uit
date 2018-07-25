@@ -23,6 +23,8 @@ namespace WebApplication5
             Configuration = configuration;
         }
 
+        private static string _connStr = @"             Server=127.0.0.1,1433;             Database=UiT;             User Id=SA;             Password=m@thprogr@m1"; 
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -36,9 +38,8 @@ namespace WebApplication5
             {
                 configuration.RootPath = "ClientApp/build";
             });
-            var connection = @"Data Source=DESKTOP-7BV2G10\;Initial Catalog=UiT;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<UitContext>(options =>
-                options.UseSqlServer(connection));
+                options.UseSqlServer(_connStr));
             //Configuration.GetConnectionString("OnlineDatabase")
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");

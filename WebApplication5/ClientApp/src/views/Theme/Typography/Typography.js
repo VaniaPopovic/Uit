@@ -43,8 +43,9 @@ class Typography extends Component {
       questions: [],
       activeTab: '1',
       modalPython: false,
-      modalMathematica: false
-    }
+      modalMathematica: false,
+      correct: false
+  }
 
 
     this.runit = this.runit.bind(this);
@@ -110,7 +111,20 @@ class Typography extends Component {
       });
 
   }
-  outf(text) {
+    outf(text) {
+       
+   
+        if (this.state.questions.correctAnswer === text) {
+          this.setState({ correct: true },
+            () => {
+              console.log("ca", this.state.questions.correctAnswer);
+              console.log("cb", text);
+              var m = document.getElementById("outpp");
+              m.innerHTML = "CORRECT"
+
+            });
+        } 
+      console.log(this.state.correct);
     var mypre = document.getElementById("output");
     console.log("ETO", text);
     var txt = document.createTextNode(text);
@@ -276,7 +290,8 @@ class Typography extends Component {
                     <CardHeader>
                         Output
                 </CardHeader>
-                    <CardBody>
+                <CardBody>
+                  <p id="outpp"></p>
                         <Row>
                             <Col>
                                 <p className="form-control" id="output" >Sample output </p>

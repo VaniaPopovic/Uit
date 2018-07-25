@@ -6,6 +6,7 @@ import Loadable from 'react-loadable'
 import { history } from './_helpers';
 import { alertActions } from './_actions';
 import { PrivateRoute } from './_components';
+import { PrivateAccess } from './PrivateAccess'
 import { LoginPage } from './LoginPage';
 import { RegisterPage } from './RegisterPage';
 import './App.css';
@@ -33,6 +34,10 @@ const Dashboard = Loadable({
   loader: () => import('./views/Dashboard'),
   loading: Loading,
 });
+const Questions = Loadable({
+  loader: () => import('./views/Base/Questions'),
+  loading: Loading,
+});
 
 // import { renderRoutes } from 'react-router-config';
 
@@ -56,7 +61,7 @@ class App extends Component {
           <Route exact path="/500" name="Page 500" component={Page500} />
          
           <PrivateRoute path="/" component={DefaultLayout} />
-
+                <PrivateAccess  exact path="/base/questions" component={Questions} />
 
           <PrivateRoute path="/dashboard" component={Dashboard} />
 		    

@@ -55,7 +55,7 @@ class AddChapter extends Component {
           <Col>
             <Card>
               <CardHeader>
-                Add Question
+                Add Chapter
               </CardHeader>
               <CardBody>
                 {

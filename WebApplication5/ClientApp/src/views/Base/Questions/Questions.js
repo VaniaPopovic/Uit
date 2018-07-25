@@ -41,7 +41,6 @@ class Questions extends Component {
 
   deleteQuestion(num) {
 
-    console.log("FUCK UP",num);
     
  fetch('/api/Questions/' + num,
    {
@@ -52,6 +51,35 @@ class Questions extends Component {
      console.log("EFKIKE", result);
      window.location.reload();
    })
+
+  }
+
+  deleteSubject(num) {
+
+
+    fetch('/api/Subjects/' + num,
+        {
+          method: 'DELETE'
+
+        }).then((Response) => Response.json())
+      .then((result) => {
+        console.log("EFKIKE", result);
+        window.location.reload();
+      })
+
+  }
+  deleteChapter(num) {
+
+
+    fetch('/api/Chapters/' + num,
+        {
+          method: 'DELETE'
+
+        }).then((Response) => Response.json())
+      .then((result) => {
+        console.log("EFKIKE", result);
+        window.location.reload();
+      })
 
   }
   componentDidMount() {
@@ -68,7 +96,8 @@ class Questions extends Component {
             <AccordionItem key={`${subject.subjectName}${index}`}>
               
                 <AccordionItemTitle id="subjects">
-                  {subject.subjectName}
+                                {subject.subjectName}
+                  <a className="btn btn-danger float-right" onClick={() => this.deleteSubject(subject.subjectID)}>Delete</a>
                 </AccordionItemTitle>
                 <AccordionItemBody>
                   <Accordion>
@@ -77,7 +106,7 @@ class Questions extends Component {
                         <AccordionItem key={chapter.chapterID}>
                       <AccordionItemTitle id="chapters">
                             {chapter.chapterName}
-                        
+                        <a className="btn btn-danger float-right" onClick={() => this.deleteChapter(chapter.chapterID)}>Delete</a>
                       </AccordionItemTitle>
                           <AccordionItemBody>
 

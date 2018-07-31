@@ -33,6 +33,36 @@ import {
 
 var callback = function (key) {
 }
+function updateState(text) {
+  this.setState({ text })
+}
+class OutPutBox extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      text: "Initial State"
+    }
+    updateState = updateState.bind(this)
+  }
+  render() {
+    return (
+      <Card>
+        <CardHeader>
+          Output
+        </CardHeader>
+        <CardBody>
+          <p id="outpp"></p>
+          <Row>
+            <Col>
+              <p className="form-control" id="output" >Sample output </p>
+              <div id="mycanvas"></div>
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
+    )
+  }
+}
 
 class Typography extends Component {
   constructor(props) {
@@ -286,20 +316,7 @@ class Typography extends Component {
           </div>
        
         
-                <Card>
-                    <CardHeader>
-                        Output
-                </CardHeader>
-                <CardBody>
-                  <p id="outpp"></p>
-                        <Row>
-                            <Col>
-                                <p className="form-control" id="output" >Sample output </p>
-                                <div id="mycanvas"></div>
-                            </Col>
-                        </Row>
-                    </CardBody>
-                </Card>
+              <OutPutBox />
             
             </div>
     );

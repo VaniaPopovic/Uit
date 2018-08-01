@@ -40,7 +40,7 @@ namespace WebApplication5
                 configuration.RootPath = "ClientApp/build";
             });
             services.AddDbContext<UitContext>(options =>
-                options.UseSqlServer(connection));
+                                              options.UseSqlServer(_connStr));
             //Configuration.GetConnectionString("OnlineDatabase")
             // configure strongly typed settings objects
             var appSettingsSection = Configuration.GetSection("AppSettings");

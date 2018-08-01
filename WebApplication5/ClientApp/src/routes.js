@@ -17,10 +17,7 @@ const EditQuestion = Loadable({
   loading: Loading,
 });
 
-const Dashboard = Loadable({
-  loader: () => import('./views/Dashboard'),
-  loading: Loading,
-});
+
 const Typography = Loadable({
   loader: () => import('./views/Theme/Typography'),
   loading: Loading,
@@ -32,7 +29,6 @@ const Typography = Loadable({
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/default', exact: true, name: 'Home', component: connectedHomePage },
-  { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/questions/:id',exact: true, name: 'Question', component: Typography },
   { path: '/base', exact: true, name: 'Base', component: Questions },
   { path: '/base/questions', name: 'Questions', component: Questions },

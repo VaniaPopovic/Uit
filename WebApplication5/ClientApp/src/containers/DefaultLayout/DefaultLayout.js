@@ -36,9 +36,9 @@ class DefaultLayout extends Component {
         questions: {
           items: [
             {
-              name: 'Dashboard',
-              url: '/dashboard',
-              icon: 'icon-speedometer'
+              name: 'Home',
+              url: '/default',
+              icon: 'icon-home'
             },
             {
               title: true,
@@ -57,9 +57,9 @@ class DefaultLayout extends Component {
         questions: {
           items: [
             {
-              name: 'Dashboard',
-              url: '/dashboard',
-              icon: 'icon-speedometer'
+              name: 'Home',
+              url: '/default',
+              icon: 'icon-home'
             },
             {
               title: true,
@@ -137,7 +137,7 @@ class DefaultLayout extends Component {
                       : (null);
                   },
                 )}
-                <Redirect from="/" to="/dashboard" />
+               
               </Switch>
             </Container>
           </main>

@@ -37,7 +37,7 @@ class HomePage extends React.Component {
               </CardHeader>
               <CardBody>
 
-                <h6>Welcome {user.firstName}  {user.lastName} !</h6>                 <p> UiT coding is a platform where you can learn the basics of several programming languages in an easy way. You will be asked to use algortihms in order to solve relatively easy mathematical problems.                   In the sidebar on the left you can find the specific subjects which will be handled. If you are not familiar with the syntax of a certain language it is highly recommended to complete the introduction first. If you think that you need more information to fulfill the task, feel free to search extra documentation on the internet. In case you didn't know, that's how 80% of programming works!                   Let the games begin!</p> 
+                <h6>Welcome {user.firstName} {user.lastName} !</h6>                 <p> UiT coding is a platform where you can learn the basics of several programming languages in an easy way. You will be asked to use algortihms in order to solve relatively easy mathematical problems.                   In the sidebar on the left you can find the specific subjects which will be handled. If you are not familiar with the syntax of a certain language it is highly recommended to complete the introduction first. If you think that you need more information to fulfill the task, feel free to search extra documentation on the internet. In case you didn't know, that's how 80% of programming works!                   Let the games begin!</p> 
 
               </CardBody>
             </Card>

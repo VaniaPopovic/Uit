@@ -1,16 +1,15 @@
     import React, { Component } from 'react';
     //import brace from 'brace';
     import AceEditor from 'react-ace';
-    import Sk from 'skulpt';
     import classnames from 'classnames';
-
+    import $ from 'jquery'; 
     import 'brace/theme/monokai';
     import 'brace/mode/python';
     import 'brace/mode/javascript';
     import 'brace/ext/language_tools';
 
     import {
-        TabContent,
+      TabContent,
       Alert,
       Container,
       TabPane,
@@ -34,20 +33,24 @@
 
 
 
-    var callback = function (key) {
+function updateState(text) {
+      this.setState({ isCorrect: text });
     }
-    function updateState(text) {
-      this.setState({ text })
-    }
+//function upd(text) {
+//  console.log("kati ekamamen");
+//      this.setState({ correctAnswer: text});
+//    }
     class OutPutBox extends Component {
       constructor(props) {
         super(props)
         this.state = {
-          text: "Initial State"
+          isCorrect: 0
+
         }
-        updateState = updateState.bind(this)
+        updateState = updateState.bind(this);
       }
       render() {
+        console.log("isCorrect", this.state.isCorrect);
         return (
           <Card>
             <CardHeader>
@@ -55,9 +58,10 @@
             </CardHeader>
             <CardBody>
               <div>
-        <Alert id="outpp" color="success">
-        </Alert>
-
+                {this.state.isCorrect === 1 &&
+                  <Alert id="outpp" color="success">Correct </Alert> }
+                {this.state.isCorrect === 2 &&
+                  <Alert id="outpp" color="danger">Wrong </Alert>}
       </div>
               <Row>
                 <Col>
@@ -71,6 +75,8 @@
       }
     }
 
+   
+
     class Typography extends Component {
       constructor(props) {
         super(props);
@@ -81,14 +87,15 @@
           activeTab: '1',
           modalPython: false,
           modalMathematica: false,
-          correct: 0
+          t: ""
       }
 
 
         this.runit = this.runit.bind(this);
         this.onChange = this.onChange.bind(this);
-        this.outf = this.outf.bind(this);
-        this.builtinRead = this.builtinRead.bind(this);
+       // this.outf = this.outf.bind(this);
+        //upd = upd.bind(this);
+      //  this.builtinRead = this.builtinRead.bind(this);
         this.resetEditor = this.resetEditor.bind(this);
         this.toggle = this.toggle.bind(this);
         this.toggleModalPython = this.toggleModalPython.bind(this);
@@ -96,6 +103,37 @@
 
       }
 
+      runit(t,b) {
+
+
+      
+        var to_compile = {
+          "LanguageChoice": "5",
+          "Program": t,
+          "Input": "",
+          "CompilerArgs": ""
+        };
+
+        $.ajax({
+          url: "http://rextester.com/rundotnet/api",
+          type: "POST",
+          data: to_compile
+        }).done(function (data) {
+          console.log("CORRECT ANSWER", typeof b);
+          console.log("OUTPUT ANSWER", typeof data.Result);
+          var mypre = document.getElementById("output");
+          mypre.innerHTML = data.Result;
+          if (b === data.Result.replace(/\n/g, '')) {
+            updateState(1);
+          } else {
+            updateState(2);
+          }
+
+        }).fail(function (data, err) {
+          alert("fail " + JSON.stringify(data) + " " + JSON.stringify(err));
+        });
+
+      }
 
       toggleModalPython() {
         this.setState({
@@ -123,58 +161,22 @@
       onChange(newValue) {
 
         this.state.value = newValue;
-        console.log('change', this.state.value);
+       // console.log('change', this.state.value);
       }
       // Here's everything you need to run a python program in skulpt
       // grab the code from your textarea
       // get a reference to your pre element for output
       // configure the output function
       // call Sk.importMainWithBody()
-      runit() {
+   
 
-        var prog = this.state.value;
-        var mypre = document.getElementById("output");
-        mypre.innerHTML = '';
-        Sk.pre = "output";
-        Sk.configure({ output: this.outf, read: this.builtinRead });
-        (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'mycanvas';
-        var myPromise = Sk.misceval.asyncToPromise(function () {
-          return Sk.importMainWithBody("<stdin>", false, prog, true);
-        });
-        myPromise.then(function (mod) {
-          console.log('success');
-        },
-          function (err) {
-            console.log(err.toString());
-          });
-
-      }
-
-        outf(text) {
-
-           
-             console.log("your output is "+text);
-            if (this.state.questions.correctAnswer === text) {
-              this.setState({ correct: 1 },
-                () => {
-                  console.log("ca", this.state.questions.correctAnswer);
-                  console.log("cb", text);
-                  var m = document.getElementById("outpp");
-                });
-            }else{
-          
-            }
-          console.log(this.state.correct);
-        var mypre = document.getElementById("output");
-        console.log("ETO", text);
-        var txt = document.createTextNode(text);
-        mypre.appendChild(txt);
-      }
-      builtinRead(x) {
-        if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
-          throw "File not found: '" + x + "'";
-        return Sk.builtinFiles["files"][x];
-      }
+      
+         // console.log("your output is " + text);
+      
+       
+      
+      
+    
       resetEditor() {
         console.log("this is called");
         this.refs.ace.editor.setValue(`# This program prints Hello, world!` + `\nprint('Hello, world!')`, -1);
@@ -202,8 +204,8 @@
 
         //console.log("current",this.props.match.params.id);
         //console.log("prev", prevProps.match.params.id);
-        //console.log("called");
-        if (this.props.match.params.id != prevProps.match.params.id) {
+        console.log("Componet called");
+        if (this.props.match.params.id !== prevProps.match.params.id) {
           this.state.value = this.refs.ace.editor.getValue();
           fetch('/api/Questions/' + this.props.match.params.id)
             .then((Response) => Response.json())
@@ -255,7 +257,7 @@
                     
                     </div>
                   <div className="card-footer">
-                    <Button onClick={this.runit} outline color="primary" size="sm">Run</Button>{' '}
+                    <Button onClick={()=> this.runit(this.state.value,this.state.questions.correctAnswer)} outline color="primary" size="sm">Run</Button>{' '}
                     <Button outline onClick={this.resetEditor} color="danger" size="sm">Clear</Button>{' '}
                   </div>
                 </Card>

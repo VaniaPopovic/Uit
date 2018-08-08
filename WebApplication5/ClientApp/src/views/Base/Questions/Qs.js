@@ -29,12 +29,10 @@ class RenderQuestions extends Component {
       }
     }
   
-   // console.log("QUE ", this.state.que)
 
   }
 
   render() {
-    console.log("QUE ", this.state.que)
     return (
       <div/>
       );

@@ -30,7 +30,6 @@
       fetch('/api/Questions/' + this.props.match.params.id)
         .then((Response) => Response.json())
         .then((findresponse) => {
-          console.log("Edit question debug",findresponse)
        
           this.setState({
            
@@ -91,10 +90,6 @@
 
         })
       })
-        /*.then((Response) => Response.json())
-        .then((findresponse) => {
-          console.log('Edit Post Find Responsse', findresponse.result);
-        })*/
 
       this.props.history.push("/base/questions");
     }

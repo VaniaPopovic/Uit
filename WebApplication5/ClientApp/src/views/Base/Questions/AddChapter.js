@@ -30,7 +30,6 @@ class AddChapter extends Component {
       questions: this.state.questions,
       subjectID: this.state.sID
     }
-    console.log("Ti stello", data);
     fetch("/api/Chapters/",
         {
           method: 'POST',
@@ -38,7 +37,6 @@ class AddChapter extends Component {
           body: JSON.stringify(data)
         }).then((Response) => Response.json())
       .then((result) => {
-        console.log("EMBIKE", result);
         window.location.reload();
       })
   }

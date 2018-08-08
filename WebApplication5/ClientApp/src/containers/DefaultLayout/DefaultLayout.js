@@ -30,7 +30,6 @@ class DefaultLayout extends Component {
   constructor(props) {
     super(props);
     let user = JSON.parse(localStorage.getItem('user'));
-  //  console.log(user);
     if (user.role === 2) {
       this.state = {
         questions: {
@@ -94,21 +93,16 @@ class DefaultLayout extends Component {
                name: result[i].chapter[k].questions[j].title, url: '/questions/' + result[i].chapter[k].questions[j].questionID, icon: 'icon-puzzle'
              };
              ch.children.push(question);
-             //  console.log(result[i].chapter[k].questions[j]);
-             //var qs = { name: result[i].subjectName, url: 'test', icon: 'icon-pencil' };
 
            }
          }
          old.items.push(subject);
-       //  console.log(old);
        }
         this.setState({
           questions: old
 
         })
-        
-    //    console.log(items);
-      
+              
        
       })
   }

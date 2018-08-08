@@ -36,7 +36,6 @@ class AddQuestion extends Component {
       correctAnswer: this.state.qCorrectAnswer,
       chapterID: this.state.qCid
     }
-    console.log("Ti stello", data);
     fetch("/api/Questions/",
         {
           method: 'POST',
@@ -44,7 +43,6 @@ class AddQuestion extends Component {
           body: JSON.stringify(data)
         }).then((Response) => Response.json())
       .then((result) => {
-        console.log("EMBIKE", result);
         window.location.reload();
       })
   }

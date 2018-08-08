@@ -30,12 +30,10 @@ class Questions extends Component {
     fetch('/api/Subjects')
       .then((Response) => Response.json())
       .then((findresponse) => {
-        // console.log(findresponse);
         this.setState({
           questions: findresponse
 
         })
-        console.log("this is called,",findresponse);
       })
   }
 
@@ -48,7 +46,6 @@ class Questions extends Component {
 
    }).then((Response) => Response.json())
    .then((result) => {
-     console.log("EFKIKE", result);
      window.location.reload();
    })
 
@@ -63,7 +60,6 @@ class Questions extends Component {
 
         }).then((Response) => Response.json())
       .then((result) => {
-        console.log("EFKIKE", result);
         window.location.reload();
       })
 
@@ -77,7 +73,6 @@ class Questions extends Component {
 
         }).then((Response) => Response.json())
       .then((result) => {
-        console.log("EFKIKE", result);
         window.location.reload();
       })
 

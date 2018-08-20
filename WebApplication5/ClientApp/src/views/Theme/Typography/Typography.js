@@ -281,7 +281,7 @@
                                           <p className="card-text">{this.state.questions.textPython}</p>
                                           <Button outline color="info" onClick={this.toggleModalPython}>Hint</Button>{' '}
                                           <Modal isOpen={this.state.modalPython} toggle={this.toggleModalPython} className={this.props.className}>
-                                              <ModalHeader toggle={this.toggleModalPython}>Modal title</ModalHeader>
+                                              <ModalHeader toggle={this.toggleModalPython}>Hint</ModalHeader>
                                               <ModalBody>
                                                   <p>{this.state.questions.helpPython}</p>
                                               </ModalBody>

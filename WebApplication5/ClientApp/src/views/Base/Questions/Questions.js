@@ -118,7 +118,7 @@ class Questions extends Component {
                                       <div className="card-body">
                                         <h4 className="card-title">Question ID: {question.questionID}</h4>
                                         <p className="card-text">Python text:  {question.textPython}</p>
-                                        <p className="card-text">Mathemtca text: {question.textMathematica}</p>
+                                        <p className="card-text">Mathematica text: {question.textMathematica}</p>
                                         <NavLink className="btn btn-danger" to={"/base/editquestion/" + question.questionID}>Edit This Question</NavLink>
                                         <a className="btn btn-danger" onClick={() => this.deleteQuestion(question.questionID)}>Delete This Question</a>
                                         </div>
